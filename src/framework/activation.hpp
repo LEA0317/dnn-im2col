@@ -66,7 +66,7 @@ public:
         return v > 0 ? v : std::exp(v) - 1.0;
     }
     inline float_t df(float_t v) const override {
-        return v > 0 ? 1.0 : v + 1.0;
+        return v > 0 ? 1.0 : std::exp(v);
     }
 };
 
