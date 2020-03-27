@@ -8,7 +8,7 @@ public:
 
 class gradient_descent : public optimizer {
 public:
-    gradient_descent() : alpha(0.01), lambda(0) {}
+  gradient_descent() : alpha(0.01f), lambda(0.f) {}
 
     void update(const vec_t &dw, vec_t &w) {
         for (size_t i = 0; i < w.size(); i++) {

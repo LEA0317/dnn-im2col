@@ -92,12 +92,12 @@ public:
              k,                     // m A(m,k) B(k,n) C(m,n)
              npq,                   // n
              crs,                   // k
-             1.0,                   // alpha
+             1.0f,                  // alpha
              &weight[0],            // matrix A
              crs,                   // lda
              &this->input[0],       // matrix B
              npq,                   // ldb
-             0.0,                   // beta
+             0.0f,                  // beta
              &output[0],            // matrix C
              npq);                  // ldc
 
@@ -113,12 +113,12 @@ public:
              k,                // m A(m,k) B(k,n) C(m,n)
              npq,              // n
              1,                // k
-             1.0,              // alpha
+             1.0f,             // alpha
              &bias[0],         // matrix A
              1,                // lda
              &onevec[0],       // matrix B
              npq,              // ldb
-             1.0,              // beta
+             1.0f,             // beta
              &output[0],       // matrix C
              npq);             // ldc
 
@@ -155,12 +155,12 @@ public:
              K,                     // m A(m,k) B(k,n) C(m,n)
              crs,                   // n
              npq,                   // k
-             1.0 / N,               // alpha
+             1.0f / N,              // alpha
              &delta[0],             // matrix A
              npq,                   // lda
              &this->input[0],       // matrix B
              npq,                   // ldb
-             0.0,                   // beta
+             0.0f,                  // beta
              &grad_weight[0],       // matrix C
              crs);                  // ldc
 
@@ -171,7 +171,7 @@ public:
         grad_bias.resize(output_channel);
 
         vec_t onevec(npq);
-        std::fill(onevec.begin(), onevec.end(), 1.0);
+        std::fill(onevec.begin(), onevec.end(), 1.0f);
 
         gemm('R',
              'N',
@@ -179,12 +179,12 @@ public:
              K,
              1,
              npq,
-             1.0 / N,
+             1.0f / N,
              &delta[0],
              npq,
              &onevec[0],
              1,
-             0.0,
+             0.0f,
              &grad_bias[0],
              1);
 
@@ -203,12 +203,12 @@ public:
                  crs,              // m A(m,k) B(k,n) C(m,n)
                  npq,              // n
                  K,                // k
-                 1.0,              // alpha
+                 1.0f,             // alpha
                  &weight[0],       // matrix A
                  crs,              // lda
                  &delta[0],        // matrix B
                  npq,              // ldb
-                 0.0,              // beta
+                 0.0f,             // beta
                  &mO[0],           // matrix C
                  npq);             // ldc
 

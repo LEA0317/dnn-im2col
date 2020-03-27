@@ -61,7 +61,7 @@ public:
                 }
                 on_minibatch_enumerate();
             }
-            std::cout << format_str("%.1f%%\n", 100.0 * (images.size() - error_count) / images.size());
+            std::cout << format_str("%.1f%%\n", 100.0f * (images.size() - error_count) / images.size());
             on_epoch_enumerate();
         }
     }
@@ -84,7 +84,7 @@ public:
             vec_t onehot(minibatch_size * tail_layer->output_channel);
             for (size_t n = 0; n < minibatch_size; n++) {
                 size_t index = n + itr * minibatch_size;
-                onehot[labels[index] + n * tail_layer->output_channel] = 1.0;
+                onehot[labels[index] + n * tail_layer->output_channel] = 1.0f;
             }
 
             // forward propagation
@@ -101,7 +101,7 @@ public:
                 }
             }
         }
-        std::cout << format_str("%.1f%%\n", 100.0 * (images.size() - error_count) / images.size());
+        std::cout << format_str("%.1f%%\n", 100.0f* (images.size() - error_count) / images.size());
     }
 };
 

@@ -23,7 +23,7 @@ void gemv(char           trans,
           const int      incy) {
     if (trans == 'N') {
         for (int m = 0; m < M; m++) {
-            float_t sum = 0.0;
+            float_t sum = 0.0f;
             for (int n = 0; n < N; n++) {
                 sum += A[m + n * lda] * x[n * incy];
             }
@@ -76,7 +76,7 @@ void gemm(char           major,
         if (transa == 'T' && transb == 'N') {
             for (int m = 0; m < M; m++) {
                 for (int n = 0; n < N; n++) {
-                    float_t sum = 0.0;
+                    float_t sum = 0.0f;
                     for (int k = 0; k < K; k++) {
                         float_t tmp = A[m + k * lda] * B[n + k * ldb];
                         sum += tmp;
@@ -89,7 +89,7 @@ void gemm(char           major,
         if (transa == 'N' && transb == 'T') {
             for (int m = 0; m < M; m++) {
                 for (int n = 0; n < N; n++) {
-                    float_t sum = 0.0;
+                    float_t sum = 0.0f;
                     for (int k = 0; k < K; k++) {
                         float_t tmp = A[k + m * lda] * B[k + n * ldb];
                         sum += tmp;
@@ -102,7 +102,7 @@ void gemm(char           major,
         if (transa == 'T' && transb == 'T') {
             for (int m = 0; m < M; m++) {
                 for (int n = 0; n < N; n++) {
-                    float_t sum = 0.0;
+                    float_t sum = 0.0f;
                     for (int k = 0; k < K; k++) {
                         float_t tmp = A[m + k * lda] * B[k + n * ldb];
                         sum += tmp;
@@ -120,7 +120,7 @@ void gemm(char           major,
         if (transa == 'N' && transb == 'N') {
             for (int m = 0; m < M; m++) {
                 for (int n = 0; n < N; n++) {
-                    float_t sum = 0.0;
+                    float_t sum = 0.0f;
                     for (int k = 0; k < K; k++) {
                         float_t tmp = A[m + k * lda] * B[k + n * ldb];
                         sum += tmp;
@@ -133,7 +133,7 @@ void gemm(char           major,
         if (transa == 'T' && transb == 'N') {
             for (int m = 0; m < M; m++) {
                 for (int n = 0; n < N; n++) {
-                    float_t sum = 0.0;
+                    float_t sum = 0.0f;
                     for (int k = 0; k < K; k++) {
                         float_t tmp = A[k + m * lda] * B[k + n * ldb];
                         sum += tmp;
@@ -146,7 +146,7 @@ void gemm(char           major,
         if (transa == 'N' && transb == 'T') {
             for (int m = 0; m < M; m++) {
                 for (int n = 0; n < N; n++) {
-                    float_t sum = 0.0;
+                    float_t sum = 0.0f;
                     for (int k = 0; k < K; k++) {
                         float_t tmp = A[m + k * lda] * B[n + k * ldb];
                         sum += tmp;
@@ -159,7 +159,7 @@ void gemm(char           major,
         if (transa == 'T' && transb == 'T') {
             for (int m = 0; m < M; m++) {
                 for (int n = 0; n < N; n++) {
-                    float_t sum = 0.0;
+                    float_t sum = 0.0f;
                     for (int k = 0; k < K; k++) {
                         float_t tmp = A[k + m * lda] * B[n + k * ldb];
                         sum += tmp;

@@ -14,7 +14,7 @@ public:
         float_t save_exp_overflow = *std::max_element(input.begin(), input.end());
 
         for (size_t n = 0; n < batch_size; n++) {
-            float_t denom = 0.0;
+            float_t denom = 0.0f;
             for (size_t c = 0; c < input_channel; c++) {
                 denom += std::exp(input[c + n * input_channel] - save_exp_overflow);
             }
@@ -39,7 +39,7 @@ public:
                     for (size_t k = 0; k < output_channel; k++) {
                         size_t  c_i   = c + n * input_channel;
                         size_t  k_i   = k + n * output_channel;
-                        float_t dy_da = (c_i == k_i) ? (output[k_i] * (1.0 - input[c_i])) : (-output[k_i] * input[c_i]);
+                        float_t dy_da = (c_i == k_i) ? (output[k_i] * (1.0f - input[c_i])) : (-output[k_i] * input[c_i]);
                         this->delta[c_i] += delta[k_i] * dy_da;
                     }
                 }

@@ -15,7 +15,7 @@ public:
         bias.resize(output_channel);
         grad_bias.resize(output_channel);
 
-        const float xavier_weight = std::sqrt(3.0 / (input_channel * output_channel));
+        const float xavier_weight = std::sqrt(3.0f / (input_channel * output_channel));
         uniform_rand(weight.begin(), weight.end(), -xavier_weight, xavier_weight);
         uniform_rand(bias.begin(), bias.end(), -xavier_weight, xavier_weight);
     }
@@ -34,12 +34,12 @@ public:
              output_channel,        // m A(m,k) B(k,n) C(m,n)
              batch_size,            // n
              input_channel,         // k
-             1.0,                   // alpha
+             1.0f,                  // alpha
              &weight[0],            // matrix A
              input_channel,         // lda
              &input[0],             // matrix B
              input_channel,         // ldb
-             0.0,                   // beta
+             0.0f,                  // beta
              &output[0],            // matrix C
              output_channel);       // ldc
 
@@ -47,7 +47,7 @@ public:
         // add bias
         //
         vec_t onevec(batch_size);
-        std::fill(onevec.begin(), onevec.end(), 1.0);
+        std::fill(onevec.begin(), onevec.end(), 1.0f);
 
         gemm('C',
              'N',
@@ -55,12 +55,12 @@ public:
              output_channel,        // m A(m,k) B(k,n) C(m,n)
              batch_size,            // n
              1,                     // k
-             1.0,                   // alpha
+             1.0f,                  // alpha
              &bias[0],              // matrix A
              output_channel,        // lda
              &onevec[0],            // matrix B
              1,                     // ldb
-             1.0,                   // beta
+             1.0f,                  // beta
              &output[0],            // matrix C
              output_channel);       // ldc
 
@@ -80,12 +80,12 @@ public:
              input_channel,          // m A(m,k) B(k,n) C(m,n)
              output_channel,         // n
              batch_size,             // k
-             1.0 / batch_size,       // alpha
+             1.0f / batch_size,      // alpha
              &input[0],              // matrix A
              input_channel,          // lda
              &delta[0],              // matrix B
              output_channel,         // ldb
-             0.0,                    // beta
+             0.0f,                   // beta
              &grad_weight[0],        // matrix C
              input_channel);         // ldc
 
@@ -93,17 +93,17 @@ public:
         // calc grad_bias
         //
         vec_t onevec(batch_size);
-        std::fill(onevec.begin(), onevec.end(), 1.0);
+        std::fill(onevec.begin(), onevec.end(), 1.0f);
 
         gemv('N',
              output_channel,
              batch_size,
-             1.0 / batch_size,
+             1.0f / batch_size,
              &delta[0],
              output_channel,
              &onevec[0],
              1,
-             0.0,
+             0.0f,
              &grad_bias[0],
              1);
 
@@ -120,12 +120,12 @@ public:
                  input_channel,         // m A(m,k) B(k,n) C(m,n)
                  batch_size,            // n
                  output_channel,        // k
-                 1.0,                   // alpha
+                 1.0f,                  // alpha
                  &weight[0],            // matrix A
                  input_channel,         // lda
                  &delta[0],             // matrix B
                  output_channel,        // ldb
-                 0.0,                   // beta
+                 0.0f,                  // beta
                  &this->delta[0],       // matrix C
                  input_channel);        // ldc
             prev_layer.lock()->bp(this->delta, batch_size);
