@@ -15,7 +15,7 @@ public:
         return std::tanh(v);
     }
     inline float_t df(float_t v) const override {
-        return 1.0f - sqr(v);
+      return 1.0f / (std::cosh(v) * std::cosh(v));
     }
 };
 
